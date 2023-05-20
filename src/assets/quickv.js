@@ -1104,10 +1104,10 @@
       modulo: "Le champ :field doit être un multiple de ':modulo'",
       phone: "Le champ :field doit être un numéro de téléphone valide",
       accepted: "Vous devez accepter le champs :field",
-      same: "Ce champ doit être identique à :même valeur de champ",
+      same: "Ce champ doit être identique à la valeur du champ :same",
       requiredIf:
-        "Le champ : est requis une fois que les :other ont la valeur actuelle",
-      requiredWhen: "Le :champ est requis lorsque :otherFields est présent",
+        "Le champ :field est requis une fois que le champs :other a la valeur actuelle",
+      requiredWhen: "Le :field est requis lorsque :otherFields est présent",
     },
     W = class {
       static getLocal(t) {
