@@ -2,6 +2,8 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.0.
 
+This project was used with Quickv version 1.2.2
+
 See the [Live demo](https://angulat-quickv.vercel.app/) here
 
 ## Installation
@@ -9,12 +11,10 @@ After clone, install the project dependencies with:
 ```bash
   npm install
 ```
-In the main index.html file, you should have the importing of the quickv source code
-```html
- <script src="assets/quickv.js"></script>
-```
+This command will install the project dependencies, `Quickv` included.
 
 Bootstrap 5 cdn is used for default apparence styles
+
 ## Run the project
 Run ng serve for a dev server. Navigate to http://localhost:4200/. The application will automatically reload if you change any of the source files.
 
@@ -29,6 +29,7 @@ The main directive is "quickv", which is used to select all forms and attach a Q
 Ex:
 ```ts
 import { AfterViewInit, Directive, ElementRef } from '@angular/core';
+import { QvForm } from 'quickv';
 
 @Directive({
   selector: 'form',
@@ -37,11 +38,8 @@ export class QuickvDirective implements AfterViewInit {
   constructor(private refElement: ElementRef<HTMLElement>) {}
   
   ngAfterViewInit(): void {
-    //@ts-ignore
     const qvForm = new QvForm(this.refElement.nativeElement);
-    qvForm.init({
-      validClass: 'is-valid',
-    });
+    qvForm.init();
   }
 }
 ```
@@ -67,6 +65,9 @@ The full HTML Code
 ```html
 <div class="bg-light vh-100 py-5">
   <form class="col-sm-7 mx-auto bg-white rounded p-3 shadow">
+    <h3>
+      Testing <a href="https://github.com/quick-v/quickv">Quickv</a> in Angular
+    </h3>
     <div class="row mb-2">
       <div class="col">
         <div class="">
@@ -76,20 +77,22 @@ The full HTML Code
             qv-rules="required|startWithUpper|minlength:2|maxlength:32"
             type="text"
             class="form-control"
+            placeholder="required|startWithUpper|minlength:2|maxlength:32"
           />
           <div class="invalid-feedback" qv-feedback="first_name"></div>
         </div>
       </div>
       <div class="col">
         <div class="">
-          <label class="form-label">Last name</label>
+          <label class="form-label">Age</label>
           <input
-            name="last_name"
-            qv-rules="required|startWithUpper|minlength:2|maxlength:32"
+            name="age"
+            qv-rules="required|int|min:18|max:35"
             type="text"
             class="form-control"
+            placeholder="required|int|min:18|max:35"
           />
-          <div class="invalid-feedback" qv-feedback="last_name"></div>
+          <div class="invalid-feedback" qv-feedback="age"></div>
         </div>
       </div>
     </div>
@@ -106,86 +109,30 @@ The full HTML Code
       <div class="invalid-feedback" qv-feedback="company"></div>
     </div>
 
-    <!-- Number input -->
+    <!-- Text input -->
     <div class="mb-2">
-      <label class="form-label">Benin Phone Number</label>
+      <label class="form-label">Cv</label>
       <input
-        type="text"
-        name="phone"
-        qv-rules="required|phone:BJ"
+        type="file"
+        name="cv"
+        qv-rules="required|file|maxFileSize:3MB|minFileSize:1MB"
         class="form-control"
       />
-      <div class="invalid-feedback" qv-feedback="phone"></div>
-      <p class="form-text text-muted">
-        The phone number must be started by (+229) or (00229)
-      </p>
-    </div>
-    <div class="mb-3">
-      <label for="profession" class="form-label">Programing language</label>
-      <select
-        class="form-select"
-        data-qv-rules
-        required
-        name="profession"
-        id="profession"
-      >
-        <option value="" selected>Select one</option>
-        <option value="programer">Programer</option>
-        <option value="developer">Software enginear</option>
-        <option value="designer">Designer / UX</option>
-      </select>
-      <div class="invalid-feedback" qv-feedback="profession"></div>
-    </div>
-    <div class="mb-3">
-      <label for="languages" class="form-label">Languages</label>
-      <select
-        class="form-select"
-        data-qv-rules="requiredIf:profession,programer,developer"
-        name="languages"
-        id="languages"
-      >
-        <option value="" selected>Select one</option>
-        <option value="">No language</option>
-        <option>Typescript / JavaScript</option>
-        <option>PHP / JAVA / PYTHON</option>
-        <option>HTML / CSS / XHTML</option>
-      </select>
-      <div class="invalid-feedback" qv-feedback="languages"></div>
-    </div>
-
-    <div class="mb-3">
-      <label for="tools" class="form-label">Design tools</label>
-      <select
-        data-qv-rules="requiredIf:profession,designer"
-        class="form-select"
-        name="tools"
-        id="tools"
-      >
-        <option value="" selected>Select one</option>
-        <option>Figma</option>
-        <option>Boostrap</option>
-        <option>TailwindCss</option>
-      </select>
-      <div class="invalid-feedback" qv-feedback="tools"></div>
-    </div>
-
-    <div class="alert alert-warning" role="alert">
-      <strong>Note</strong> <br />
-      If profession is Programmer or Software developer, <b>Languages</b> is
-      required <br />
-      If profession is Designer / UX, <b>Tools</b> is required <br />
+      <div class="invalid-feedback" qv-feedback="cv"></div>
     </div>
 
     <button type="submit" qv-submit class="btn btn-primary btn-block mb-2">
       Submit
     </button>
   </form>
+  <div class="text-center mt-3">
+    <a href="https://github.com/Claudye/ng-quickv">
+      Source code is availlable on GitHub</a
+    >
+  </div>
 </div>
 ```
-Please note that this project uses version `2.0.0-alpha` of `Quickv`. Further testing was not done, the main goal was to observe the behavior of Quickv with Angular.
-
-It is important to mention that the `requiredIf` rule is not available in version 1.2.0 of `Quickv`.
-
+ 
 ### Credits
 
 These project were developed by [Claude Fassinou](https://github.com/Claudye) for [Quickv](https://github.com/quick-v).

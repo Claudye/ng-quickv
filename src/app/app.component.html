@@ -12,20 +12,22 @@
             qv-rules="required|startWithUpper|minlength:2|maxlength:32"
             type="text"
             class="form-control"
+            placeholder="required|startWithUpper|minlength:2|maxlength:32"
           />
           <div class="invalid-feedback" qv-feedback="first_name"></div>
         </div>
       </div>
       <div class="col">
         <div class="">
-          <label class="form-label">Last name</label>
+          <label class="form-label">Age</label>
           <input
-            name="last_name"
-            qv-rules="required|startWithUpper|minlength:2|maxlength:32"
+            name="age"
+            qv-rules="required|int|min:18|max:35"
             type="text"
             class="form-control"
+            placeholder="required|int|min:18|max:35"
           />
-          <div class="invalid-feedback" qv-feedback="last_name"></div>
+          <div class="invalid-feedback" qv-feedback="age"></div>
         </div>
       </div>
     </div>
@@ -42,81 +44,23 @@
       <div class="invalid-feedback" qv-feedback="company"></div>
     </div>
 
-    <!-- Number input -->
+    <!-- Text input -->
     <div class="mb-2">
-      <label class="form-label">Benin Phone Number</label>
+      <label class="form-label">Cv</label>
       <input
-        type="text"
-        name="phone"
-        qv-rules="required|phone:BJ"
+        type="file"
+        name="cv"
+        qv-rules="required|file|maxFileSize:3MB|minFileSize:1MB"
         class="form-control"
       />
-      <div class="invalid-feedback" qv-feedback="phone"></div>
-      <p class="form-text text-muted">
-        The phone number must be started by (+229) or (00229)
-      </p>
-    </div>
-    <div class="mb-3">
-      <label for="profession" class="form-label">Programing language</label>
-      <select
-        class="form-select"
-        data-qv-rules
-        required
-        name="profession"
-        id="profession"
-      >
-        <option value="" selected>Select one</option>
-        <option value="programer">Programer</option>
-        <option value="developer">Software enginear</option>
-        <option value="designer">Designer / UX</option>
-      </select>
-      <div class="invalid-feedback" qv-feedback="profession"></div>
-    </div>
-    <div class="mb-3">
-      <label for="languages" class="form-label">Languages</label>
-      <select
-        class="form-select"
-        data-qv-rules="requiredIf:profession,programer,developer"
-        name="languages"
-        id="languages"
-      >
-        <option value="" selected>Select one</option>
-        <option value="">No language</option>
-        <option>Typescript / JavaScript</option>
-        <option>PHP / JAVA / PYTHON</option>
-        <option>HTML / CSS / XHTML</option>
-      </select>
-      <div class="invalid-feedback" qv-feedback="languages"></div>
-    </div>
-
-    <div class="mb-3">
-      <label for="tools" class="form-label">Design tools</label>
-      <select
-        data-qv-rules="requiredIf:profession,designer"
-        class="form-select"
-        name="tools"
-        id="tools"
-      >
-        <option value="" selected>Select one</option>
-        <option>Figma</option>
-        <option>Boostrap</option>
-        <option>TailwindCss</option>
-      </select>
-      <div class="invalid-feedback" qv-feedback="tools"></div>
-    </div>
-
-    <div class="alert alert-warning" role="alert">
-      <strong>Note</strong> <br />
-      If profession is Programmer or Software developer, <b>Languages</b> is
-      required <br />
-      If profession is Designer / UX, <b>Tools</b> is required <br />
+      <div class="invalid-feedback" qv-feedback="cv"></div>
     </div>
 
     <button type="submit" qv-submit class="btn btn-primary btn-block mb-2">
       Submit
     </button>
   </form>
-  <div class="text-center">
+  <div class="text-center mt-3">
     <a href="https://github.com/Claudye/ng-quickv">
       Source code is availlable on GitHub</a
     >
