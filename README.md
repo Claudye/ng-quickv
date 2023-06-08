@@ -1,163 +1,110 @@
 # NgQuickv
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.0.
-
-This project was used with Quickv version 1.2.2 
+This project is an example Angular application that demonstrates the usage of Quickv version 1.2.2 for form validation. The following instructions will guide you through the process of integrating Quickv into your own Angular project.
 
 ## Usage
 
-After clone, install the project dependencies with:
+After cloning the project, navigate to its root directory and install the project dependencies by running the following command:
 ```bash
-  npm install
+npm install
 ```
-This command will install the project dependencies, `Quickv` included.
+This command will install the necessary dependencies, including Quickv.
 
-Bootstrap 5 cdn is used for default apparence styles
+The project uses Bootstrap 5 CDN for default appearance styles.
 
-## Run the project
-Run ng serve for a dev server. Navigate to http://localhost:4200/. The application will automatically reload if you change any of the source files.
+## Running the Project
 
-## Architecture
-I create a module named quickv that is in the source directory `/src/app/quickv` and I export it into the  `AppModule`
+To run the project, use the following command in the project's root directory:
+```bash
+ng serve
+```
+This will start a development server, and you can navigate to http://localhost:4200/ in your browser. The application will automatically reload if you make any changes to the source files.
+
+## Project Architecture
+
+In this project, I have created a module named `quickv` located in the `/src/app/quickv` directory. This module is then imported and used in the `AppModule` to enable Quickv functionality throughout the application.
 
 ## Note
-Quickv is an attribute-based package that provides form validation functionality. As part of the integration with Angular, I've created directives that allow `Quickv` attributes to be changed using the "qv-" prefix instead of "data-qv-" for brevity.
 
-The main directive is "quickv", which is used to select all forms and attach a `QvForm` instance to them. This allows you to take advantage of Quickv's validation features within Angular forms.
+Quickv is an attribute-based package that provides form validation functionality. To integrate it with Angular, I have created directives that allow you to use Quickv attributes with the "qv-" prefix instead of "data-qv-" for brevity.
 
-## Intregations in your application
-To integrate Quickv into your application, follow these steps:
+The main directive is "quickv", which is used to select all forms and attach a `QvForm` instance to them. This enables you to leverage Quickv's validation features within Angular forms.
 
+## Integrating Quickv into Your Application
 
-1. Installer Quickv : Exécutez la commande suivante dans votre projet pour installer Quickv via npm :
-   ```
-   npm install quickv
-   ```
+To integrate Quickv into your own Angular application, follow these steps:
 
-2. Copier le dossier Quickv : 
-Copiez le dossier `/src/app/quickv` du projet que vous avez cloné dans votre propre projet Angular, à n'importe quel endroit où Angular peut le charger. Par exemple, vous pouvez le coller dans le dossier `/src/app/quickv` de votre projet.
+1. Install Quickv: Run the following command in your Angular project's root directory to install Quickv via npm:
+```bash
+npm install quickv
+```
 
-4. Importer le module QuickvModule : Dans le module où vous souhaitez utiliser Quickv, importez le module `QuickvModule` à partir de `quickv`. Par exemple, si vous souhaitez l'utiliser dans votre `AppModule`, vous pouvez ajouter l'importation suivante :
-
+2. Import QuickvModule: In the module where you want to use Quickv, import the `QuickvModule` from `quickv`. For example, if you want to use it in your `AppModule`, open the `app.module.ts` file and add the import statement:
 ```typescript
-import { QuickvModule } from './quickv/quickv.module';
+import { QuickvModule } from 'quickv';
 
 @NgModule({
-     imports: [
-       // ...
-       QuickvModule
-     ],
-     // ...
+  imports: [
+    // ... other imports
+    QuickvModule
+  ],
+  // ... other module configurations
 })
 export class AppModule { }
 ```
+Copy the `/src/app/quickv` folder from this project, and paste it into your project.
 
-4. Utiliser la directive Quickv : Ajoutez la directive `quickv` à votre formulaire pour l'activer. Par exemple, si vous avez le formulaire suivant :
-
+3. Use Quickv directives in your forms: Open the template file containing your form and add the Quickv directives to the form and form fields. For example:
 ```html
-   <form quickv>
-     <!-- Vos champs de formulaire ici -->
-   </form>
-```
+<form quickv>
+  <label>Username</label>
+  <input type="text" name="username" qv-rules="required|minlength:5" />
 
-5. Définir les règles de validation : Pour chaque champ de formulaire que vous souhaitez valider, utilisez l'attribut `qv-rules` pour définir les règles de validation. Par exemple :
+  <label>Email</label>
+  <input type="email" name="email" qv-rules="required|email" />
 
-```html
-<input
-	name="first_name"
-	rules="required|startWithUpper|minlength:2|maxlength:32"
-	type="text"
-	class="form-control"
-/>
-```
-
-   Vous pouvez ajouter plusieurs règles en les séparant par le caractère `|`.
-
-6. Afficher les messages d'erreur : Pour afficher les messages d'erreur de validation, ajoutez un élément HTML avec la classe `invalid-feedback` et l'attribut `qv-feedback` spécifiant le nom du champ. Par exemple :
-
-```html
-<div class="invalid-feedback" qv-feedback="first_name"></div>
-```
-
-   Vous pouvez personnaliser les messages d'erreur en utilisant l'attribut `qv-messages`. Par exemple :
-
-```html
-<div class="invalid-feedback" qv-feedback="first_name" qv-messages="Erreur règle 1|Erreur règle 2"></div>
-```
-
-7. Désactiver le bouton de soumission par défaut : Si vous souhaitez désactiver le bouton de soumission par défaut fourni par Quickv, ajoutez l'attribut `data-qv-submit` à celui-ci. Par exemple :
-```html
-<button type="submit" qv-submit class="btn btn-primary btn-block mb-2">
-     Submit
-</button>
-```
-Une fois que vous avez suivi ces étapes, vous devriez pouvoir utiliser Quickv pour la validation de formulaire dans votre projet Angular. Assurez-vous d'avoir correctement importé les modules et suivi les directives dans votre template.
-###  Exemple
-```html
-<form class="col-sm-7 mx-auto bg-white rounded p-3 shadow" quickv>
-  <h3>
-    Testing <a href="https://github.com/quick-v/quickv">Quickv</a> in Angular
-  </h3>
-  <div class="row mb-2">
-    <div class="col">
-      <div class="">
-        <label class="form-label">First name</label>
-        <input
-          name="first_name"
-          qv- rules="required|startWithUpper|minlength:2|maxlength:32"
-          type="text"
-          class="form-control"
-        />
-        <div class="invalid-feedback" qv-feedback="first_name"></div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="">
-        <label class="form-label">Age</label>
-        <input
-          name="age"
-          qv-rules="required|int|min:18|max:35"
-          type="text"
-          class="form-control"
-          placeholder="required|int|min:18|max:35"
-        />
-        <div class="invalid-feedback" qv-feedback="age"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Text input -->
-  <div class="mb-2">
-    <label class="form-label">Company name</label>
-    <input
-      type="text"
-      name="company"
-      qv-rules="required|startWith:@|minlength:3|maxlength:20"
-      class="form-control"
-    />
-    <div class="invalid-feedback" qv-feedback="company"></div>
-  </div>
-
-  <!-- File input -->
-  <div class="mb-2">
-    <label class="form-label">Cv</label>
-    <input
-      type="file"
-      name="cv"
-      qv-rules="required|file|maxFileSize:3MB|minFileSize:1MB"
-      class="form-control"
-    />
-    <div class="invalid-feedback" qv-feedback="cv"></div>
-  </div>
-
-  <button type="submit" qv-submit class="btn btn-primary btn-block mb-2">
-    Submit
-  </button>
+  <button type="submit" qv-submit>Submit</button>
 </form>
 ```
- 
-### Credits
 
-These project were developed by [Claude Fassinou](https://github.com/Claudye) for [Quickv](https://github.com/quick-v).
+4. Display validation messages: To display validation error messages, add elements with the `qv-feedback` attribute inside or near the form fields. For example:
+```html
+<form quickv>
+  <label>Username</label>
+  <input type="text" name="username" qv-rules="required|minlength:5" />
+  <div qv-feedback="username" class="error-message"></div>
 
-**_Happy coding_**
+  <label>Email</label>
+  <input type="email" name="email" qv-rules="required|email" />
+  <div qv-feedback="email" class="error-message"></div>
+
+  <button type="submit" qv-submit>Submit</button>
+</form>
+```
+
+5. Customize error messages: To customize the error messages for specific validation rules, you can
+
+ use the `qv-messages` attribute on the feedback element. For example:
+```html
+<form quickv>
+  <label>Username</label>
+  <input type="text" name="username" qv-rules="required|minlength:5" />
+  <div qv-feedback="username" qv-messages="Username is required|Username must have at least 5 characters" class="error-message"></div>
+
+  <label>Email</label>
+  <input type="email" name="email" qv-rules="required|email" />
+  <div qv-feedback="email" qv-messages="Email is required|Please enter a valid email address" class="error-message"></div>
+
+  <button type="submit" qv-submit>Submit</button>
+</form>
+```
+
+6. Disable default submit button behavior (optional): If you want to disable the default form submission behavior provided by Quickv, add the `data-qv-submit` attribute to your submit button. For example:
+```html
+<button type="submit" qv-submit data-qv-submit>Submit</button>
+```
+
+Once you have followed these steps, Quickv will handle form validation based on the defined rules, display error messages, and prevent form submission if there are any validation errors.
+
+## Customization
+This code is just one use of Quickv in Angular, if you want your own logic, you can follow the quickv [documentation](https://github.com/quick-v/quickv).
