@@ -2,11 +2,10 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.0.
 
-This project was used with Quickv version 1.2.2
-
-See the [Live demo](https://angulat-quickv.vercel.app/) here
+This project was used with Quickv version 1.2.2 
 
 ## Installation
+
 After clone, install the project dependencies with:
 ```bash
   npm install

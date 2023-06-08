@@ -1,10 +1,13 @@
-import { Directive } from '@angular/core';
+import { Directive, HostBinding, Input } from '@angular/core';
 
 @Directive({
-  selector: '[appQvMessages]'
+  selector: '[qv-messages]',
 })
 export class QvMessagesDirective {
+  constructor() {}
+  @Input('qv-messages') qvFeedback: string = '';
 
-  constructor() { }
-
+  @HostBinding('attr.data-qv-messages') get qvFeedbackValues() {
+    return this.qvFeedback;
+  }
 }

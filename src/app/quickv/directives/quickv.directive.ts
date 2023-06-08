@@ -2,7 +2,7 @@ import { AfterViewInit, Directive, ElementRef } from '@angular/core';
 import { QvForm } from 'quickv';
 
 @Directive({
-  selector: 'form',
+  selector: '[quickv]',
 })
 export class QuickvDirective implements AfterViewInit {
   constructor(private refElement: ElementRef<HTMLElement>) {}
